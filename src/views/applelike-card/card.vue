@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div ref="card" class="card" @click="onExpand($event)" :class="{ active: isExpand }">
-      <img src="http://source.unsplash.com/900x600/?nature,water,1" />
+    <div ref="card" id="card" :class="{ card: true, active: isExpand }" @click="onExpand()">
+      <img src="../../assets/image/photo-1589963348451-142110e1ad3f.jpg" />
       <div class="title">APP OF THE DAY</div>
       <div class="content-wrapper">
         <div class="content">
@@ -17,57 +17,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="card" @click="onExpand($event)" :class="{ active: isExpand }">
-      <img src="http://source.unsplash.com/900x600/?nature,water,2" />
-      <div class="title">APP OF THE DAY</div>
-      <div class="content-wrapper">
-        <div class="content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris
-          </p>
-          <p>
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident,
-          </p>
-          <p>sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="card" @click="onExpand($event)" :class="{ active: isExpand }">
-      <img src="http://source.unsplash.com/900x600/?nature,water,3" />
-      <div class="title">APP OF THE DAY</div>
-      <div class="content-wrapper">
-        <div class="content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris
-          </p>
-          <p>
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident,
-          </p>
-          <p>sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </div>
-    </div>
-    <div class="card" @click="onExpand($event)" :class="{ active: isExpand }">
-      <img src="http://source.unsplash.com/900x600/?nature,water,4" />
-      <div class="title">APP OF THE DAY</div>
-      <div class="content-wrapper">
-        <div class="content">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-            laboris
-          </p>
-          <p>
-            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-            proident,
-          </p>
-          <p>sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -77,66 +26,58 @@ export default {
   components: {},
   data() {
     return {
+      cardItem: null,
+      scrollTop: 0,
       isExpand: false,
     };
   },
   created() {},
-  mounted() {
+  mounted() {},
+  watch: {
+    data(oldVal, newVal) {
+      this.$nextTick(() => {
+        this.cardItem = this.$refs.card;
+        cardItem.addEventListener('scroll', this.getElementScrollTop);
+      });
+    },
   },
   methods: {
-    onExpand(event) {
-      let card = event.currentTarget;
-      let cardOffset = card.getBoundingClientRect().top - this.getScrollTop();
-      card.style.translateY = -1*cardOffset + 'px';
-      console.log(cardOffset);
-      console.log(card.style.translateY);
+    onExpand() {
       this.isExpand = !this.isExpand;
     },
-    getScrollTop() {
-      let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-      return scrollTop;
+    getElementScrollTop(e) {
+      this.scrollTop = this.cardItem.scrollTop;
+      console.log(this.scrollTop);
     },
   },
 };
 </script>
 
 <style lang="scss" scope>
-:root {
-  font-size: 15px;
-  font-family: Helvetica;
-
-  --body-width: 480px;
-  --card-width: 420px;
-  --card-height: 280px;
-  --img-height: 226px;
-  --img-height-expanded: 320px;
-}
-
 body {
-  width: var(--body-width);
-  background-color: #eee;
-  margin: auto;
+  --card-width: 94vw;
+  --card-height: 58vw;
+  --image-height: 45vw;
+  --image-height-expanded: 60vw;
+}
+.card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  padding: 1rem, 0;
-}
-
-.card {
+  margin: 1rem 0;
   width: var(--card-width);
   height: var(--card-height);
   background-color: #fff;
   border-radius: 1rem;
   box-shadow: 0 0.2rem 2rem rgba(0, 0, 0, 0.1);
-  margin: 1rem 0;
-  transition: 0.3s all cubic-bezier(0, 1, 0.95, 1.05);
+  transition: 0.3s all cubic-bezier(0, 0.8, 1, 1.4);
+  font-size: 15px;
+  font-family: Helvetica;
 }
 
 .card img {
   display: block;
   width: 100%;
-  height: var(--img-height);
+  height: var(--image-height);
   object-fit: cover;
 
   border-top-left-radius: 1rem;
@@ -144,14 +85,17 @@ body {
 }
 
 .card .title {
-  margin: 0;
-  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: calc(var(--card-height) - var(--image-height));
+  padding: 0 1.2rem;
+  box-sizing: border-box;
+  font-size: 1.3rem;
   font-weight: bold;
-  padding: 0.8rem 1.2rem;
-  background-color: #fff;
-  line-height: 2rem;
   letter-spacing: -0.5px;
-  padding-bottom: 0;
+  //   background-color: #fff;
 }
 
 .card .content-wrapper {
@@ -166,26 +110,28 @@ body {
 }
 
 .card p {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.5rem;
 }
 
 .card.active {
-  transform: translateY(-200px) scale(calc(480 / 420));
+  transform: translateY(-1rem) scale(calc(100 / 94));
   transform-origin: 50% 0;
   border-radius: 0;
 }
 
 .card.active .title {
+  background-color: #fff;
 }
 
 .card.active img {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
-  height: var(--img-height-expanded);
+  height: var(--image-height-expanded);
 }
 
 .card.active .content-wrapper {
   height: 100vh;
+  overflow: visible;
 }
 </style>

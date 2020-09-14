@@ -25,8 +25,8 @@ const routes = [
   },
   {
     path: '/app-card',
-    name: 'card',
-    component: () => import('../views/applelike-card/card.vue')
+    name: 'index',
+    component: () => import('../views/applelike-card/index.vue')
   }
 ]
 
