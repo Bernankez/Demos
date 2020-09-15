@@ -25,8 +25,13 @@ const routes = [
   },
   {
     path: '/app-card',
-    name: 'index',
+    name: 'card-index',
     component: () => import('../views/applelike-card/index.vue')
+  },
+  {
+    path: '/export-excel',
+    name: 'excel-index',
+    component: () => import('../views/export-excel/index.vue')
   }
 ]
 
