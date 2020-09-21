@@ -37,6 +37,11 @@ const routes = [
     path: '/fast-debug',
     name: 'fast-debug-index',
     component: () => import('../views/fast-debug-environment/index.vue')
+  },
+  {
+    path: '/online-vue-editer',
+    name: 'online-vue-editer',
+    component: () => import('../views/online-vue-editer/index.vue')
   }
 ]
 
