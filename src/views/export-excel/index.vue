@@ -38,11 +38,16 @@ export default {
     mounted() { },
     methods: {
         onExport() {
+            const multiHeader = [[
+                ' ',
+                'Example',
+                ' ',
+                'Example4'
+            ]];
             const tHeader = [
                 'Example1',
                 'Example2',
                 'Example3',
-                'Example4',
             ];
             const filterVal = [
                 'e1',
@@ -50,10 +55,16 @@ export default {
                 'e3',
                 'e4',
             ];
+            const merges = [
+                'B1:C1',
+                'D1:D2'
+            ];
             const data = this.tableData.map(v => filterVal.map(j => v[j]));
             EXCEL.export_json_to_excel({
+                multiHeader,
                 header: tHeader,
                 data,
+                merges,
                 filename: 'ExampleExcel',
             });
         }

@@ -32,6 +32,11 @@ const routes = [
     path: '/export-excel',
     name: 'excel-index',
     component: () => import('../views/export-excel/index.vue')
+  },
+  {
+    path: '/fast-debug',
+    name: 'fast-debug-index',
+    component: () => import('../views/fast-debug-environment/index.vue')
   }
 ]
 
