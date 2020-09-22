@@ -42,6 +42,11 @@ const routes = [
     path: '/online-vue-editer',
     name: 'online-vue-editer',
     component: () => import('../views/online-vue-editer/index.vue')
+  },
+  {
+    path: '/vue-run-sfc',
+    name: 'online-vue-debug',
+    component: () => import('../views/vue-run-sfc/index.vue')
   }
 ]
 

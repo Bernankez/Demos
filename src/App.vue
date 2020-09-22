@@ -18,6 +18,14 @@ export default {
             isIndexActive: 0,
             menuItem: [
                 {
+                    title: '主页',
+                    url: './'
+                },
+                {
+                    title: 'vue-run-sfc',
+                    url: './vue-run-sfc'
+                },
+                {
                     title: '在线vue调试',
                     url: '/online-vue-editer'
                 },
@@ -68,11 +76,14 @@ a:active {
 }
 
 @media screen and (max-width: 600px) {
+    .outer {
+        display: flex;
+        flex-direction: column;
+    }
 }
 
 .outer {
-    display: grid;
-    grid-template-columns: minmax(200px, 25%) 1fr;
+    display: flex;
 }
 
 .outer .siderbar {
@@ -80,8 +91,9 @@ a:active {
     flex-direction: column;
     justify-content: flex-start;
     flex-basis: 200px;
-    height: 500px;
-    overflow: scroll;
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow: auto;
     background-color: #fff;
 }
 
@@ -116,9 +128,20 @@ a:active {
     transition: all 1s ease 0.5s;
 }
 
+.outer .siderbar::-webkit-scrollbar-thumb:hover {
+    /*滚动条里面小方块*/
+    border-radius: 10px;
+    background: rgba(200, 200, 200, 100);
+    transition: all 1s ease 0.5s;
+}
+
 .outer .siderbar::-webkit-scrollbar-track {
     /*滚动条里面轨道*/
     border-radius: 10px;
     background: rgba(0, 0, 0, 0);
+}
+
+.outer .content {
+    flex-grow: 1;
 }
 </style>
