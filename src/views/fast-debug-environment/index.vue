@@ -1,15 +1,18 @@
 <template>
     <div class="page">
         <el-button class="testbutton" type="primary" @click="onClick">button</el-button>
-        <el-input class="text" type="textarea" :autosize="{ minRows: 10}" v-model="text"></el-input>
-        <div class="content">{{text}}</div>
+        <!-- <el-input class="text" type="textarea" :autosize="{ minRows: 10}" v-model="text"></el-input> -->
+        <!-- <div class="content">{{text}}</div> -->
+        <child :clickButton="onClick" father="父组件传值"></child>
     </div>
 </template>
 
 <script>
+import child from './child';
+
 export default {
     name: 'fast-debug',
-    components: {},
+    components: { child },
     data() {
         return {
             text: ''
@@ -20,7 +23,11 @@ export default {
     },
     methods: {
         onClick() {
-            this.$message(this.text);
+            // this.$message(this.text);
+            // console.log('父组件');
+            setTimeout(() => {
+                console.log('父组件');
+            }, 800);
         }
     }
 }
