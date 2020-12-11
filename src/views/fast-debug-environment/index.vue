@@ -4,6 +4,12 @@
         <!-- <el-input class="text" type="textarea" :autosize="{ minRows: 10}" v-model="text"></el-input> -->
         <!-- <div class="content">{{text}}</div> -->
         <child :clickButton="onClick" father="父组件传值"></child>
+
+        <el-button plain @click="onTestClick">测试</el-button>
+        <el-table :data="tableData" @selection-change="onSelectChange">
+            <el-table-column type="selection"></el-table-column>
+            <el-table-column prop="ttt" label="Ceshi"></el-table-column>
+        </el-table>
     </div>
 </template>
 
@@ -15,7 +21,22 @@ export default {
     components: { child },
     data() {
         return {
-            text: ''
+            text: '',
+            tableSelected: [],
+            tableData: [
+                {
+                    ttt: '123',
+                },
+                {
+                    ttt: '12344',
+                },
+                {
+                    ttt: '432',
+                },
+                {
+                    ttt: 'ae',
+                },
+            ],
         }
     },
     created() {
@@ -28,6 +49,14 @@ export default {
             setTimeout(() => {
                 console.log('父组件');
             }, 800);
+        },
+        onTestClick() {
+            this.tableData.forEach(item => {
+                this.tableSelected.push(item);
+            })
+        },
+        onSelectChange(selected) {
+            this.tableSelected = selected;
         }
     }
 }
